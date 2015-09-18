@@ -12,6 +12,7 @@
         - php5-mysql
         - php5-fpm
         - php5-mcrypt
+        - phpmyadmin
 
     - name: Configure Nginx
       copy: src=files/default.conf dest=/etc/nginx/sites-available/default
@@ -19,11 +20,25 @@
     - name: enable default vhost
       file: src=/etc/nginx/sites-available/default dest=/etc/nginx/sites-enabled/default state=link force=yes
 
-    - name: restart nginx
-      service: name=nginx state=restarted
-
     - name: Configure php-fpm
       lineinfile: dest=/etc/php5/fpm/php.ini line='cgi.fix_pathinfo=0' state=present
 
+    - name: enable mcrypt extension
+      shell: php5enmod mcrypt
+
+    - name: link phpmyadmin
+      file: src=/usr/share/phpmyadmin dest=/vagrant/app/phpmyadmin state=link
+
+    - name: allow login to phpmyadmin without password
+      lineinfile:
+        dest=/etc/phpmyadmin/config.inc.php
+        line="$cfg['Servers'][$i]['AllowNoPassword'] = TRUE;"
+        insertafter="^\s+\/\/.*'AllowNoPassword'.*$"
+        state=present
+
+    - name: restart nginx
+      service: name=nginx state=restarted
+
     - name: restart php-fpm
       service: name=php5-fpm state=restarted
+
