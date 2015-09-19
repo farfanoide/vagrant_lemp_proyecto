@@ -12,6 +12,7 @@ Incluye:
 ## Requerimientos:
 
 
+- [Ansible](http://docs.ansible.com/ansible/intro_installation.html)
 - [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 - [Vagrant](https://www.vagrantup.com/downloads.html)
 
@@ -48,10 +49,11 @@ Incluye:
 ## Acceso
 
 Una vez inicializada la maquina se puede acceder a la aplicacion mediante un
-navegador en http://localhost:8080
+navegador en [http://localhost:8080](http://localhost:8080)
 
 Para acceder a phpmyadmin tambien lo hacen por le navegador en la direccion
-http://localhost:8080/phpmyadmin con el usuario root y sin contraseña
+[http://localhost:8080/phpmyadmin](http://localhost:8080/phpmyadmin) con el
+usuario root y sin contraseña
 
 ## Consideraciones y configuraciones:
 
